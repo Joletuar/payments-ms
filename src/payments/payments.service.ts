@@ -74,7 +74,7 @@ export class PaymentsService {
             receiptUrl: chargeSucceded.receipt_url,
           };
 
-          this.logger.log({ payload });
+          // this.logger.log({ payload });
 
           // emit no necesita una respuesta
           this.client.emit('payment.succeded', payload);
