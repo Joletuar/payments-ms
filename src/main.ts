@@ -22,9 +22,15 @@ async function bootstrap() {
   // Creamos el microservicio
   app.connectMicroservice<MicroserviceOptions>(
     {
-      transport: Transport.NATS,
+      transport: Transport.RMQ,
       options: {
-        servers: envs.NATS_SERVER,
+        queue: 'payments',
+        urls: [envs.RABBITMQ_SERVER],
+        noAck: false,
+        queueOptions: {
+          durable: true,
+          autoDelete: false,
+        },
       },
     },
     {

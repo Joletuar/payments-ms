@@ -8,7 +8,7 @@ interface EnvVars {
   SUCCESS_URL: string;
   CANCEL_URL: string;
   ENDPOINT_SECRET: string;
-  NATS_SERVER: Array<string>;
+  RABBITMQ_SERVER: string;
 }
 
 const envVarsSchema = joi
@@ -18,14 +18,11 @@ const envVarsSchema = joi
     SUCCESS_URL: joi.string().required(),
     CANCEL_URL: joi.string().required(),
     ENDPOINT_SECRET: joi.string().required(),
-    NATS_SERVER: joi.array().items(joi.string()).required(),
+    RABBITMQ_SERVER: joi.string().required(),
   })
   .unknown(true);
 
-const { error, value } = envVarsSchema.validate({
-  ...process.env,
-  NATS_SERVER: process.env.NATS_SERVER.split(','),
-});
+const { error, value } = envVarsSchema.validate(process.env);
 
 if (error) {
   throw new Error(`Config validation error: ${error.message}`);
@@ -39,5 +36,5 @@ export const envs = {
   SUCCESS_URL: envVars.SUCCESS_URL,
   CANCEL_URL: envVars.CANCEL_URL,
   ENDPOINT_SECRET: envVars.ENDPOINT_SECRET,
-  NATS_SERVER: envVars.NATS_SERVER,
+  RABBITMQ_SERVER: envVars.RABBITMQ_SERVER,
 };

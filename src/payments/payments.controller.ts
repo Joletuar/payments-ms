@@ -10,7 +10,7 @@ export class PaymentsController {
   constructor(private readonly paymentsService: PaymentsService) {}
 
   @Post('create-payment-session') // Usa http
-  @MessagePattern('create.payment.session') // Usa Nats
+  @MessagePattern('create.payment.session') // Usa rabbitmq
   createPaymentSession(@Body() paymentsSessionDto: PaymentsSessionDto) {
     return this.paymentsService.createPaymentSession(paymentsSessionDto);
   }

@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 
 import { PaymentsService } from './payments.service';
 import { PaymentsController } from './payments.controller';
-import { NatsModule } from 'src/transports/nats.module';
+import { RabbitMqModule } from 'src/transports/rabbitmq.module';
 
 @Module({
   controllers: [PaymentsController],
   providers: [PaymentsService],
-  imports: [NatsModule],
+  imports: [RabbitMqModule],
 })
 export class PaymentsModule {}

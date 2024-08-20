@@ -1,1 +1,1 @@
-export const NATS_SERVICE = 'NATS_SERVICE';
+export const ORDERS_SERVICE = 'ORDERS_SERVICE';
