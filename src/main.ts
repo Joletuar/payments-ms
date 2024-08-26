@@ -4,12 +4,16 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 import { AppModule } from './app.module';
 import { envs } from './config/envs';
+import { Logger as PinoLogger } from 'nestjs-pino';
 
 async function bootstrap() {
   // Aplicación normal
   const app = await NestFactory.create(AppModule, {
     rawBody: true,
+    bufferLogs: true,
   });
+
+  app.useLogger(app.get(PinoLogger));
 
   // Esto debe ir antes del listen para que sea tomado en cuenta
   app.useGlobalPipes(
