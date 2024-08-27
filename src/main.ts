@@ -1,10 +1,10 @@
 import { NestFactory } from '@nestjs/core';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { Logger as PinoLogger } from 'nestjs-pino';
 
 import { AppModule } from './app.module';
 import { envs } from './config/envs';
-import { Logger as PinoLogger } from 'nestjs-pino';
 
 async function bootstrap() {
   // Aplicación normal
